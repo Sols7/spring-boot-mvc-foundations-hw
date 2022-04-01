@@ -7,6 +7,8 @@ import org.springframework.context.ApplicationContext;
 import ru.itsjava.domain.Pet;
 import ru.itsjava.repository.PetRepository;
 import ru.itsjava.repository.UserRepository;
+import ru.itsjava.service.PetService;
+import ru.itsjava.service.UserService;
 
 import java.sql.SQLException;
 
@@ -16,23 +18,30 @@ public class SpringDataFoundationsHwApplication {
 	public static void main(String[] args) throws SQLException {
 		ApplicationContext context = SpringApplication.run(SpringDataFoundationsHwApplication.class, args);
 
-		PetRepository petRepository = context.getBean(PetRepository.class);
-		System.out.println("petRepository.getById(1L) = " + petRepository.getById(1L));
+		UserService userService = context.getBean(UserService.class);
+		userService.printAllUsers();
 
-		Pet pet = new Pet(0L, "newPet");
-		petRepository.save(pet);
-		System.out.println("petRepository.getById(3L) = " + petRepository.getById(3L));
+		PetService petService = context.getBean(PetService.class);
+		petService.changePet("pet1", "newPet");
+		petService.printPet("newPet");
 
-		Pet pet3 = petRepository.getById(3L);
-		pet3.setSpecies("NEWPET");
-		petRepository.save(pet3);
-		System.out.println("petRepository.getById(3L) = " + petRepository.getById(3L));
-
-		petRepository.deleteById(3L);
-		System.out.println("petRepository.findById(3L).isPresent() = " + petRepository.findById(3L).isPresent());
-
-		UserRepository userRepository = context.getBean(UserRepository.class);
-		System.out.println(userRepository.findAll());
+//		PetRepository petRepository = context.getBean(PetRepository.class);
+//		System.out.println("petRepository.getById(1L) = " + petRepository.getById(1L));
+//
+//		Pet pet = new Pet(0L, "newPet");
+//		petRepository.save(pet);
+//		System.out.println("petRepository.getById(3L) = " + petRepository.getById(3L));
+//
+//		Pet pet3 = petRepository.getById(3L);
+//		pet3.setSpecies("NEWPET");
+//		petRepository.save(pet3);
+//		System.out.println("petRepository.getById(3L) = " + petRepository.getById(3L));
+//
+//		petRepository.deleteById(3L);
+//		System.out.println("petRepository.findById(3L).isPresent() = " + petRepository.findById(3L).isPresent());
+//
+//		UserRepository userRepository = context.getBean(UserRepository.class);
+//		System.out.println(userRepository.findAll());
 
 //		Console.main(args);
 	}
