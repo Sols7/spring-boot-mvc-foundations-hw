@@ -10,9 +10,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity(name = "pets")
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
 public class Pet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

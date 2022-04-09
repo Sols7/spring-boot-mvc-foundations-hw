@@ -1,5 +1,6 @@
 package ru.itsjava.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -7,6 +8,7 @@ import javax.persistence.*;
 
 @Entity(name = "users")
 @Data
+@AllArgsConstructor
 @NoArgsConstructor
 public class User {
     @Id

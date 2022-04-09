@@ -20,4 +20,10 @@ public class UserServiceImpl implements UserService{
         List<User> users = userRepository.findAll();
         System.out.println(users.toString());
     }
+
+    @Transactional(readOnly = true)
+    @Override
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
 }
