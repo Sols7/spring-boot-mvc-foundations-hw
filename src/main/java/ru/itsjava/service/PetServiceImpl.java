@@ -8,7 +8,7 @@ import ru.itsjava.repository.PetRepository;
 
 @Service
 @RequiredArgsConstructor
-public class PetServiceImpl implements PetService{
+public class PetServiceImpl implements PetService {
     private final PetRepository petRepository;
 
     @Transactional
@@ -25,5 +25,23 @@ public class PetServiceImpl implements PetService{
     public void printPet(String species) {
         Pet pet = petRepository.getBySpecies(species).get();
         System.out.println((pet));
+    }
+
+    @Transactional
+    @Override
+    public void createPet(Pet pet) {
+        petRepository.save(pet);
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public Pet getPetById(long id) {
+        return petRepository.findById(id).get();
+    }
+
+    @Transactional
+    @Override
+    public void deletePetById(long id) {
+        petRepository.deleteById(id);
     }
 }

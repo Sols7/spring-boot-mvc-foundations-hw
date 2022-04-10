@@ -11,9 +11,10 @@ public class PetDto {
     private String species;
 
     public static Pet fromDto(PetDto petDto) {
-        long id = Long.parseLong(petDto.id);
-
-        return new Pet(id, petDto.species);
+        if (petDto.id == null){
+            petDto.id = "0";
+        }
+        return new Pet(Long.parseLong(petDto.id), petDto.species);
     }
 
     public static PetDto toDto(Pet pet) {
