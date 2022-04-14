@@ -1,6 +1,12 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-Pets:
+<head>
+    <meta charset="UTF-8"/>
+    <title>Pets:</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+
 <body>
+<h1>All pets</h1>
 <table>
     <tr th:each="pet: ${pets}">
         <td th:text="${pet.id}">The Pet Id</td>
@@ -14,5 +20,7 @@ Pets:
     </tr>
 </table>
 <a th:href="@{/pet/add}" href="add-pet-page.html">Add new Pet</a>
+<br>
+<a th:href="@{/}" href="index.html">Menu</a>
 </body>
 </html>

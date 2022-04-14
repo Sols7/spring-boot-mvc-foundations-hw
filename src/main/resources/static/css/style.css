@@ -1,0 +1,21 @@
+h1, h3, table, th {
+	color: black;
+	text-align: left;
+
+}
+
+h3, td {
+    font-style: normal;
+}
+
+td {
+    border: 1px solid #dddddd;
+	width: 150px;
+	height: 50px;
+}
+
+button {
+    border: 1px solid #dddddd;
+	width: 80px;
+	height: 30px;
+}

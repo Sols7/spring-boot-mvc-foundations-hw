@@ -24,7 +24,7 @@ public class PetController {
         return "get-pet-page";
     }
 
-    @GetMapping("/")
+    @GetMapping("/pet")
     public String petsPage(Model model) {
         List<PetDto> allPetsDto = petService.getAllPets()
                 .stream().map(PetDto::toDto).collect(Collectors.toList());
@@ -40,7 +40,7 @@ public class PetController {
     @PostMapping("pet/add")
     public String afterAddPage(PetDto petDto) {
         petService.createPet(PetDto.fromDto(petDto));
-        return "redirect:/";
+        return "redirect:/pet";
     }
 
     @GetMapping("pet/{id}/edit")
@@ -53,7 +53,7 @@ public class PetController {
     @PostMapping("pet/{id}/edit")
     public String afterEditPage(PetDto petDto) {
         petService.updatePet(PetDto.fromDto(petDto));
-        return "redirect:/";
+        return "redirect:/pet";
     }
 
     @GetMapping("pet/{id}/delete")
@@ -66,6 +66,6 @@ public class PetController {
     @PostMapping("pet/{id}/delete")
     public String afterDeletePage(PetDto petDto) {
         petService.deletePet(PetDto.fromDto(petDto));
-        return "redirect:/";
+        return "redirect:/pet";
     }
 }

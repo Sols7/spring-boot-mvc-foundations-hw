@@ -14,6 +14,9 @@ public class UserDto {
     private String pet;
 
     public static User fromDto(UserDto userDto) {
+        if (userDto.id == null){
+            userDto.id = "0";
+        }
         long id = Long.parseLong(userDto.id);
         int age = Integer.parseInt(userDto.age);
         Pet pet = new Pet(0L, userDto.pet);

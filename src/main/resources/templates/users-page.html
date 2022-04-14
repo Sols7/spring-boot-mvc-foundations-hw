@@ -1,12 +1,28 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-Users:
+<head>
+    <meta charset="UTF-8"/>
+    <title>Users:</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+
 <body>
+<h1>All users</h1>
 <table>
     <tr th:each="user: ${users}">
         <td th:text="${user.name}">The Best User</td>
         <td th:text="${user.age}">The Age Best User</td>
         <td th:text="${user.pet}">The Best Pet</td>
+        <td>
+            <a th:href="@{/user/{id}/edit(id=${user.id})}" href="edit-user-page.html">Update</a>
+        </td>
+        <td>
+            <a th:href="@{/user/{id}/delete(id=${user.id})}" href="delete-user-page.html">Delete</a>
+        </td>
     </tr>
 </table>
+
+<a th:href="@{/user/add}" href="add-user-page.html">Add new User</a>
+<br>
+<a th:href="@{/}" href="index.html">Menu</a>
 </body>
 </html>
