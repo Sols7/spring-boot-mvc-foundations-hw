@@ -17,22 +17,6 @@ public class PetServiceImpl implements PetService {
 
     @Transactional
     @Override
-    public void changePet(String oldSpecies, String newSpecies) {
-        Pet pet = petRepository.getBySpecies(oldSpecies).get();
-        pet.setSpecies(newSpecies);
-        petRepository.save(pet);
-        System.out.println("Successfully saved!");
-    }
-
-    @Transactional(readOnly = true)
-    @Override
-    public void printPet(String species) {
-        Pet pet = petRepository.getBySpecies(species).get();
-        System.out.println((pet));
-    }
-
-    @Transactional
-    @Override
     public void createPet(Pet pet) {
         petRepository.save(pet);
     }
@@ -50,15 +34,16 @@ public class PetServiceImpl implements PetService {
         petRepository.delete(pet);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<Pet> getAllPets() {
         return petRepository.findAll();
     }
 
+    @Transactional
     @Override
     public void updatePet(Pet pet) {
         petRepository.save(pet);
     }
-
 
 }

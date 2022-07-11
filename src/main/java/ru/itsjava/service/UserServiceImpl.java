@@ -10,16 +10,8 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
-
-    @Transactional(readOnly = true)
-    @Override
-    public void printAllUsers() {
-        System.out.println("Our users:");
-        List<User> users = userRepository.findAll();
-        System.out.println(users.toString());
-    }
 
     @Transactional(readOnly = true)
     @Override
@@ -39,6 +31,7 @@ public class UserServiceImpl implements UserService{
         return userRepository.findById(id).get();
     }
 
+    @Transactional
     @Override
     public void updateUser(User user) {
         userRepository.save(user);
