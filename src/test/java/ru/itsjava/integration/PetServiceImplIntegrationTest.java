@@ -15,7 +15,7 @@ import java.util.NoSuchElementException;
 
 @DataJpaTest
 @Import(PetServiceImpl.class)
-public class PetServiceImplTest {
+public class PetServiceImplIntegrationTest {
 
     @Autowired
     private PetRepository petRepository;

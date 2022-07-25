@@ -14,7 +14,7 @@ import java.util.NoSuchElementException;
 
 @DataJpaTest
 @Import(UserServiceImpl.class)
-public class UserServiceImplTest {
+public class UserServiceImplIntegrationTest {
     @Autowired
     private UserRepository userRepository;
 
