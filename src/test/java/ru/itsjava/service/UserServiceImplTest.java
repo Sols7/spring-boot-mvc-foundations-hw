@@ -4,39 +4,47 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import ru.itsjava.domain.Pet;
 import ru.itsjava.domain.User;
 import ru.itsjava.repository.UserRepository;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
 
-@DataJpaTest
+import static org.mockito.Mockito.when;
+
+@SpringBootTest
 @Import(UserServiceImpl.class)
 public class UserServiceImplTest {
 
-//    @Configuration
-//    static class MyConfiguration {
-//        Pet pet = new Pet(1, "testPet1");
-//        User user1 = new User(1, "tUser1", 18, pet);
-//        User user2 = new User(2, "tUser2", 25, pet);
-//        List users = new ArrayList(Arrays.asList(user1, user2));
-//
-//        @Bean
-//        public UserRepository userRepositoryMock() {
-//            UserRepository mockUserRepository = Mockito.mock(UserRepository.class);
-//            when(mockUserRepository.findAll()).thenReturn(users);
-//            return mockUserRepository;
-//        }
-//
-//        @Bean
-//        public UserService userService() {
-//            return new UserServiceImpl(userRepositoryMock());
-//        }
-//    }
+    @Configuration
+    static class MyConfiguration {
+        Pet pet = new Pet(1L, "testPet1");
+        User user1 = new User(1L, "tUser1", 18, pet);
+        User user2 = new User(2L, "tUser2", 25, pet);
+        List<User> users = List.of(user1, user2);
+
+        @Bean
+        public UserRepository userRepositoryMock() {
+            UserRepository mockUserRepository = Mockito.mock(UserRepository.class);
+            when(mockUserRepository.findAll()).thenReturn(users);
+            return mockUserRepository;
+        }
+
+        @Bean
+        public PetService petServiceMock() {
+            return Mockito.mock(PetService.class);
+        }
+
+        @Bean
+        public UserService userService() {
+            return new UserServiceImpl(userRepositoryMock(), petServiceMock());
+        }
+    }
 
     @Autowired
     private UserService userService;
@@ -46,12 +54,12 @@ public class UserServiceImplTest {
 
     @Test
     public void getAllUsersTest() {
-        Pet pet = new Pet(1, "testPet1");
-        User user1 = new User(1, "tUser1", 18, pet);
-        User user2 = new User(2, "tUser2", 25, pet);
-        ArrayList<User> users = new ArrayList<>(Arrays.asList(user1, user2));
+        Pet pet = new Pet(1L, "testPet1");
+        User user1 = new User(1L, "tUser1", 18, pet);
+        User user2 = new User(2L, "tUser2", 25, pet);
+        List<User> users = List.of(user1, user2);
 
-        Mockito.when(userRepositoryMock.findAll()).thenReturn(users);
+        when(userRepositoryMock.findAll()).thenReturn(users);
         var actualUsers = userService.getAllUsers();
 
         Assertions.assertEquals(users, actualUsers);
