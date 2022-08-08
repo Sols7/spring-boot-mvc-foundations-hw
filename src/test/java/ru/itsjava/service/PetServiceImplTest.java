@@ -36,8 +36,7 @@ public class PetServiceImplTest {
 
         @Bean
         public UserRepository userRepositoryMock() {
-            UserRepository mockUserRepository = Mockito.mock(UserRepository.class);
-            return mockUserRepository;
+            return Mockito.mock(UserRepository.class);
         }
 
         @Bean
