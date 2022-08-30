@@ -30,7 +30,6 @@ public class UserServiceImpl implements UserService {
                 user.setPet(pet);
             }
         }
-
         userRepository.save(user);
     }
 
@@ -43,6 +42,12 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public void updateUser(User user) {
+        List<Pet> petList = petService.getAllPets();
+        for (Pet pet : petList) {
+            if (pet.getSpecies().equals(user.getPet().getSpecies())) {
+                user.setPet(pet);
+            }
+        }
         userRepository.save(user);
     }
 
